@@ -1,0 +1,32 @@
+{
+  "name": "code-to-pdf",
+  "displayName": "Code to PDF",
+  "description": "Convert all code files and program output in the current folder into a PDF for online submission.",
+  "version": "1.0.0",
+  "publisher": "yourname",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.exportToPDF"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.exportToPDF",
+        "title": "Export Code and Output to PDF"
+      }
+    ]
+  },
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "fs-extra": "10.1.0"
+  },
+  "devDependencies": {
+    "vsce": "^2.12.0"
+  }
+}
