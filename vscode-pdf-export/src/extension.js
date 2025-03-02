@@ -2,7 +2,14 @@ const vscode = require('vscode');
 const { generatePDF } = require('./pdfGenerator');
 
 function activate(context) {
-  // Register the command "extension.exportToPDF".
+  // Create status bar item
+  const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+  statusBarItem.text = "$(file-pdf) Export PDF";
+  statusBarItem.tooltip = "Export workspace code to PDF";
+  statusBarItem.command = 'extension.exportToPDF';
+  statusBarItem.show();
+  
+  // Register the command "extension.exportToPDF"
   let disposable = vscode.commands.registerCommand('extension.exportToPDF', async function () {
     const workspaceFolder = vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders[0].uri.fsPath;
     if (!workspaceFolder) {
@@ -20,7 +27,9 @@ function activate(context) {
     }
   });
 
+  // Add both the command and status bar item to subscriptions
   context.subscriptions.push(disposable);
+  context.subscriptions.push(statusBarItem);
 }
 
 function deactivate() {}
